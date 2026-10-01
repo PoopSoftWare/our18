@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <base href="./">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101010" />
+  <title>OyunMerkez — Oyun fırsatları ve ücretsiz oyunlar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script>
+    window.tgLoadTimeout = setTimeout(() => {
+      console.warn('Telegram WebApp yüklenemedi, yedek modu kullanılıyor');
+      window.telegramFallback = true;
+    }, 5000);
+  </script>
+  <script src="https://telegram.org/js/telegram-web-app.js"
+          onload="clearTimeout(window.tgLoadTimeout)"
+          onerror="clearTimeout(window.tgLoadTimeout); window.telegramFallback = true;"></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">OM</span>
+      <span>Oyun<span class="brand-accent">Merkez</span></span>
+    </div>
+
+    <label class="search-wrap">
+      <i data-lucide="search" class="search-icon"></i>
+      <input id="searchInput" class="search-input" type="search" placeholder="Oyun, tür veya isim ara..." autocomplete="off" />
+    </label>
+
+    <button id="aboutBtn" class="icon-btn" type="button" aria-label="OyunMerkez hakkında">
+      <i data-lucide="info"></i>
+    </button>
+  </header>
+
+  <nav class="desktop-nav" id="desktopNav">
+    <button class="dnav-item active" data-section="home"><i data-lucide="layout-grid"></i><span>Merkez</span></button>
+    <button class="dnav-item" data-section="gratis"><i data-lucide="gift"></i><span>Ücretsiz</span></button>
+    <button class="dnav-item" data-section="ofertas"><i data-lucide="percent"></i><span>İndirimler</span></button>
+    <button class="dnav-item" data-section="noticias"><i data-lucide="newspaper"></i><span>Haberler</span></button>
+    <button class="dnav-item" data-section="explorar"><i data-lucide="compass"></i><span>Keşfet</span></button>
+  </nav>
+
+  <main class="content">
+    <section id="section-home" class="panel active">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="hero-kicker"><span class="live-dot"></span> OYUN FIRSATLARI, TEK YERDE</div>
+          <h1>Bugün ne<br><em>oynuyorsun?</em></h1>
+          <p>Yeni çıkanları, ücretsiz oyunları ve gerçek fiyat düşüşlerini tek bir akışta keşfet.</p>
+          <div class="hero-actions">
+            <button class="hero-action primary" data-goto="ofertas"><span>İndirimlere bak</span><i data-lucide="arrow-up-right"></i></button>
+            <button class="hero-action secondary" data-goto="gratis"><i data-lucide="gift"></i><span>Ücretsiz oyunlar</span></button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-card art-card-back"></div>
+          <div class="art-card art-card-mid"></div>
+          <div class="art-card art-card-main">
+            <div class="art-label">OYUN<br>MERKEZ</div>
+            <div class="art-grid"></div>
+            <div class="art-orb"></div>
+            <span class="art-index">01</span>
+          </div>
+          <div class="art-note">CURATED<br>DAILY</div>
+        </div>
+      </section>
+
+      <div class="aggregator-note">
+        <i data-lucide="shield-check"></i>
+        <div><strong>OyunMerkez bağımsız bir fırsat toplayıcısıdır.</strong> Steam, Epic Games, GOG veya başka bir mağazanın resmi sitesi/ortağı değildir. Fiyat ve fırsatlar herkese açık üçüncü taraf API'lerden alınır; satın alma işlemi ilgili resmi mağazada tamamlanır.</div>
+      </div>
+
+      <div class="stats-strip">
+        <div><strong id="statFree">—</strong><span>şu an ücretsiz</span></div>
+        <div><strong id="statDeals">—</strong><span>aktif indirim</span></div>
+        <div><strong>24/7</strong><span>fırsat akışı</span></div>
+      </div>
+
+      <div class="section-head">
+        <div><p class="eyebrow">YENİ & TAZE</p><h2>Yeni çıkanlar</h2></div>
+        <button class="link-btn" data-goto="nuevos">Hepsini gör <i data-lucide="arrow-up-right"></i></button>
+      </div>
+      <div id="carousel-nuevos-home" class="carousel"></div>
+
+      <div class="section-head">
+        <div><p class="eyebrow">SIFIR TL</p><h2>Şu an ücretsiz</h2></div>
+        <button class="link-btn" data-goto="gratis">Hepsini gör <i data-lucide="arrow-up-right"></i></button>
+      </div>
+      <div id="carousel-gratis-home" class="carousel"></div>
+
+      <div class="section-head">
+        <div><p class="eyebrow">FİYAT DÜŞTÜ</p><h2>En iyi indirimler</h2></div>
+        <button class="link-btn" data-goto="ofertas">Hepsini gör <i data-lucide="arrow-up-right"></i></button>
+      </div>
+      <div id="carousel-ofertas-home" class="carousel"></div>
+
+      <div class="section-head">
+        <div><p class="eyebrow">GÜNDEM</p><h2>Oyun haberleri</h2></div>
+        <button class="link-btn" data-goto="noticias">Hepsini gör <i data-lucide="arrow-up-right"></i></button>
+      </div>
+      <div id="news-list-home" class="news-list"></div>
+    </section>
+
+    <section id="section-nuevos" class="panel">
+      <div class="page-intro"><p class="eyebrow">OYUN KATALOĞU</p><h2>Yeni çıkanlar</h2><p>Son dönemde yayınlanan ve oyuncuların radarına giren oyunlar.</p></div>
+      <div id="grid-nuevos" class="grid"></div>
+      <div id="sentinel-nuevos" class="scroll-sentinel"><span></span><span></span><span></span></div>
+    </section>
+
+    <section id="section-gratis" class="panel">
+      <div class="page-intro"><p class="eyebrow">CÜZDAN DOSTU</p><h2>Şu an ücretsiz</h2><p>Ücret ödemeden alabileceğin aktif oyun fırsatları.</p></div>
+      <div id="grid-gratis" class="grid"></div>
+    </section>
+
+    <section id="section-ofertas" class="panel">
+      <div class="page-intro"><p class="eyebrow">FİYAT TAKİBİ</p><h2>İndirimler</h2><p>Fiyatı düşen oyunları karşılaştır, resmi mağazaya geç.</p></div>
+      <div id="grid-ofertas" class="grid"></div>
+      <div id="sentinel-ofertas" class="scroll-sentinel"><span></span><span></span><span></span></div>
+    </section>
+
+    <section id="section-noticias" class="panel">
+      <div class="page-intro"><p class="eyebrow">OYUN GÜNDEMİ</p><h2>Haberler</h2><p>Farklı kaynaklardan derlenen güncel oyun haberleri.</p></div>
+      <div id="news-list" class="news-list news-page"></div>
+    </section>
+
+    <section id="section-explorar" class="panel">
+      <div class="page-intro"><p class="eyebrow">KENDİNİ KAYBET</p><h2>Keşfet</h2><p>Tür seç, ara ve yeni bir oyun bul.</p></div>
+      <div id="genreChips" class="chips"></div>
+      <div id="grid-explorar" class="grid"></div>
+      <div id="sentinel-explorar" class="scroll-sentinel"><span></span><span></span><span></span></div>
+    </section>
+  </main>
+</div>
+
+<div id="sheetBackdrop" class="sheet-backdrop">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <button class="sheet-close" id="sheetCloseBtn" type="button" aria-label="Kapat"><i data-lucide="x"></i></button>
+    <div id="sheetCover" class="sheet-cover"></div>
+    <div class="sheet-body">
+      <div class="sheet-kicker">OYUN DETAYI</div>
+      <h3 id="sheetTitle"></h3>
+      <p id="sheetMeta" class="sheet-meta"></p>
+      <div id="sheetRatings" class="sheet-ratings"></div>
+      <div id="sheetDesc" class="sheet-desc"></div>
+      <div id="sheetStores" class="sheet-stores"></div>
+    </div>
+  </div>
+</div>
+
+<div id="aboutBackdrop" class="sheet-backdrop">
+  <div class="sheet about-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-body">
+      <div class="sheet-kicker">HAKKINDA</div>
+      <h3>OyunMerkez</h3>
+      <p class="sheet-desc">OyunMerkez; oyun dünyasındaki yenilikleri, ücretsiz oyunları ve fiyat fırsatlarını tek yerde toplar. Bağımsız bir toplayıcıdır; resmi bir mağaza değildir ve Steam, Epic Games Store, GOG veya başka bir platformla bağlantılı değildir.</p>
+      <p class="sheet-desc">Oyun, indirim ve hediye verileri RAWG, CheapShark ve GamerPower'ın herkese açık API'lerinden; haberler ise sektörün RSS kaynaklarından alınır. Bir oyun satın alırken veya bir hediyeyi talep ederken işlem her zaman ilgili resmi mağazada tamamlanır.</p>
+      <p class="sheet-disclaimer">OyunMerkez · Mini App · Üçüncü taraf reklamı yok</p>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <div class="bnav-indicator" id="bnavIndicator"></div>
+  <button class="bnav-item active" data-section="home"><i data-lucide="layout-grid"></i><span>Merkez</span></button>
+  <button class="bnav-item" data-section="gratis"><i data-lucide="gift"></i><span>Ücretsiz</span></button>
+  <button class="bnav-item" data-section="ofertas"><i data-lucide="percent"></i><span>İndirim</span></button>
+  <button class="bnav-item" data-section="noticias"><i data-lucide="newspaper"></i><span>Haber</span></button>
+  <button class="bnav-item" data-section="explorar"><i data-lucide="compass"></i><span>Keşfet</span></button>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
